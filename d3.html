@@ -1,0 +1,273 @@
+<!doctype html>
+
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+
+  <title>Koronavírus esetszám Magyarországon</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+
+  <link rel="stylesheet" href="styles.css?v=1.0">
+  <script src="https://d3js.org/d3.v5.js"></script>
+
+</head>
+
+<body>
+
+<div class="main">
+	<header class="head">
+		<h1> Koronavírus esetszám</h1>
+	</header>
+	<div class="wrapper"></div>
+</div> 
+
+
+   <script type="text/javascript">
+	// Select your div
+
+	const covidHuData = 
+			[
+		   {
+		   date: "2020-03-04",
+		   results: {   
+			  "Cases": 2,
+			  "Newcases": 2,
+			  "Deaths": 0,
+			  "Recovered": 0,
+			  "Samples": 230
+			  }
+		   },
+		   {
+		   date: "2020-03-05",
+		   results: {   
+			  "Cases": 4,
+			  "Newcases": 2,
+			  "Deaths": 0,
+			  "Recovered": 0,
+			  "Samples": 230
+			  }
+		   },
+		   {
+		   date: "2020-03-06",
+		   results: {   
+			  "Cases": 4,
+			  "Newcases": 0,
+			  "Deaths": 0,
+			  "Recovered": 0,
+			  "Samples": 269
+			  }
+		   },
+		   {
+		   date: "2020-03-07",
+		   results: {   
+			  "Cases": 5,
+			  "Newcases": 1,
+			  "Deaths": 0,
+			  "Recovered": 0,
+			  "Samples": 319
+			  }
+		   },	
+		   {
+		   date: "2020-03-08",
+		   results: {   
+			  "Cases": 7,
+			  "Newcases": 2,
+			  "Deaths": 0,
+			  "Recovered": 0,
+			  "Samples": 362
+			  }
+		   },	
+		   {
+		   date: "2020-03-09",
+		   results: {   
+			  "Cases": 9,
+			  "Newcases": 2,
+			  "Deaths": 0,
+			  "Recovered": 0,
+			  "Samples": 362
+			  }
+		   },	
+		   {
+		   date: "2020-03-10",
+		   results: {   
+			  "Cases": 12,
+			  "Newcases": 3,
+			  "Deaths": 0,
+			  "Recovered": 0,
+			  "Samples": 531
+			  }
+		   },	
+		   {
+		   date: "2020-03-11",
+		   results: {   
+			  "Cases": 13,
+			  "Newcases": 1,
+			  "Deaths": 0,
+			  "Recovered": 0,
+			  "Samples": 609
+			  }
+		   },				
+		   {
+		   date: "2020-03-12",
+		   results: {   
+			  "Cases": 16,
+			  "Newcases": 3,
+			  "Deaths": 0,
+			  "Recovered": 0,
+			  "Samples": 730
+			  }
+		   },	
+		   {
+		   date: "2020-03-13",
+		   results: {   
+			  "Cases": 19,
+			  "Newcases": 3,
+			  "Deaths": 0,
+			  "Recovered": 1,
+			  "Samples": 858
+			  }
+		   },		   
+		   {
+		   date: "2020-03-14",
+		   results: {   
+			  "Cases": 30,
+			  "Newcases": 11,
+			  "Deaths": 0,
+			  "Recovered": 1,
+			  "Samples": 1014
+			  }
+		   },
+		   {
+		   date: "2020-03-15",
+		   results: {   
+			  "Cases": 32,
+			  "Newcases": 2,
+			  "Deaths": 0,
+			  "Recovered": 1,
+			  "Samples": 1236
+			  }
+		   },
+		   {
+		   date: "2020-03-16",
+		   results: {
+			  "Cases": 39,
+			  "Newcases": 7,
+			  "Deaths": 1,
+			  "Recovered": 2,
+			  "Samples": 1470
+			  }
+		   },
+		   {
+		   date: "2020-03-17",
+		   results: {
+			  "Cases": 50,
+			  "Newcases": 11,
+			  "Deaths": 1,
+			  "Recovered": 2,
+			  "Samples": 1587
+			  }
+		   },
+		  { 
+		   date: "2020-03-18",
+		   results: {
+			  "Cases": 58,
+			  "Newcases": 8,
+			  "Deaths": 1,
+			  "Recovered": 2,
+			  "Samples": 1803
+			}
+		   },			
+			 {
+			   date: "2020-03-19",
+			   results: {
+			   "Cases": 73,
+			   "Newcases": 15,
+			   "Deaths": 1,
+			   "Recovered": 2,
+			   "Samples": 2322 
+			   }
+			 },
+			 {
+			   date: "2020-03-20",
+			   results: {
+			   "Cases": 85,
+			   "Newcases": 12,
+			   "Deaths": 4,
+			   "Recovered": 7,
+			   "Samples": 3007 
+			   }
+			 },
+			 {
+			   date: "2020-03-21",
+			   results: {
+			   "Cases": 103,
+			   "Newcases": 18,
+			   "Deaths": 4,
+			   "Recovered": 7,
+			   "Samples": 3477
+			   }
+			 },
+			 {
+			   date: "2020-03-22",
+			   results: {
+			   "Cases": 131,
+			   "Newcases": 28,
+			   "Deaths": 4,
+			   "Recovered": 7,
+			   "Samples": 4443
+			   }
+			 }
+			]
+
+
+
+	
+	
+	// select the figure element
+	const wrapper = d3.select('.wrapper');
+	const day = wrapper
+		.selectAll('.day')
+		.data(covidHuData)
+		.enter()
+		.append('div')
+		.attr('class','day');
+		
+	const daydate = day
+		.append('div')
+		.attr('class','date')
+		.text(d => d.date);
+	
+	const inner_waffle = day 
+		.append('div')
+		.attr('class','waffle')
+
+	const cases_cases = inner_waffle
+		.selectAll('.case')
+		.data(d => d3.range(d.results.Cases))
+		.enter()
+		.append('div')
+		.attr('class', 'case');
+	
+	const recover_cases = inner_waffle
+		.selectAll('.recover')
+		.data(d => d3.range(d.results.Recovered))
+		.enter()
+		.append('div')
+		.attr('class', 'recover');	
+	
+	const deaths_cases = inner_waffle
+		.selectAll('.death')
+		.data(d => d3.range(d.results.Deaths))
+		.enter()
+		.append('div')
+		.attr('class', 'death');	
+	
+
+	
+	
+ </script>
+</body>
+
+	
+</html>
